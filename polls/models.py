@@ -20,5 +20,10 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return "{ 'Question': " + self.question.__str__() + ", 'choice_content': " + self.choice_content + ", 'votes': " + str(
-            self.votes) + " }"
+        return "{ 'Question': " + self.question.__str__() + ", 'choice_content': " + self.choice_content + \
+               ", 'votes': " + str(self.votes) + " }"
+
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=32)
+    last_name = models.CharField(max_length=32)
