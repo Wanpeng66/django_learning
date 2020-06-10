@@ -31,9 +31,14 @@ def time_server():
 # 获取chrome实例
 def getChrome() -> webdriver:
     options = webdriver.ChromeOptions()
-    options.add_argument('--log-level=3')
-
-    driver_path = "D:/driver/chromedriver.exe"
+    # options.add_argument('--log-level=3')
+    prefs = {
+        'profile.default_content_setting_values': {
+            'images': 2
+        }
+    }
+    options.add_experimental_option("prefs", prefs)
+    driver_path = "D:/driver/chromedriver83.exe"
     driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
 
     return driver
@@ -48,8 +53,8 @@ def buy(driver: webdriver):
     btn = "//div[@class='btnWarp']"
     word = "//span[@class='btn']"
     count = 0
-    login_time = "2020-06-09 10:23:00"
-    buy_time = "2020-06-09 10:24:00"
+    login_time = "2020-06-10 13:23:00"
+    buy_time = "2020-06-10 13:23:55"
     isFirst = True
     wait = WebDriverWait(driver, 10, 0.5)
     while True:
@@ -86,7 +91,7 @@ def buy(driver: webdriver):
                 if targetBtnWord.text != "已抢光":
                     # 如果详情页中购买按钮上的文字不为已枪光 则点击购买
                     targetBtn.click()
-                    time.sleep(3)
+                    time.sleep(5)
                     # 抢到了就退出...
                     break
     print("抢购结束...")
@@ -129,4 +134,4 @@ def concurrency_run(num: int):
 if __name__ == '__main__':
     # 1 代表开启一个浏览器实例  如果想多开 那么就改成大于1的整数
     # 你只需要改buy中的代码即可 其他代码不要动
-    concurrency_run(2)
+    concurrency_run(1)
